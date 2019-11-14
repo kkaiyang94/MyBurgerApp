@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = {
   salad: .5,
-  cheese: .4,
+  cheese: .45,
   meat: 1.3,
-  bacon: .7,
+  bacon: .75,
 }
 
 class BurgerBuilder extends Component {
@@ -19,6 +21,17 @@ class BurgerBuilder extends Component {
       meat: 0
     },
     totalPrice: 4,
+    purchasable: false,
+  }
+
+  setPurchasableState = () => {
+    const { ingredients } = this.state;
+    const items = {
+      ...ingredients
+    }
+    const total = Object.values(items).reduce((a, b) => a + b, 0);
+
+    this.setState({ purchasable: total > 0 });
   }
 
   addIngredientHandler = (type) => {
@@ -26,7 +39,7 @@ class BurgerBuilder extends Component {
     const updateIngredients = {
       ...ingredients
     }
-    
+
     updateIngredients[type]++;
 
     const newPrice = totalPrice + INGREDIENT_PRICES[type];
@@ -34,7 +47,7 @@ class BurgerBuilder extends Component {
     this.setState({
       ingredients: updateIngredients,
       totalPrice: newPrice
-    });
+    }, () => this.setPurchasableState());
   }
 
   subtractIngredientHandler = (type) => {
@@ -53,11 +66,11 @@ class BurgerBuilder extends Component {
     this.setState({
       ingredients: updateIngredients,
       totalPrice: newPrice
-    });
+    }, () => this.setPurchasableState());
   }
 
   render() {
-    const { ingredients } = this.state;
+    const { ingredients, totalPrice, purchasable } = this.state;
     const disabledInfo = {
       ...ingredients
     }
@@ -66,11 +79,16 @@ class BurgerBuilder extends Component {
     }
     return (
       <>
-        <Burger ingredients={ingredients}/>
+        <Modal>
+          <OrderSummary ingredients={ingredients}/>
+        </Modal>
+        <Burger ingredients={ingredients} />
         <BuildControls
-        increment={this.addIngredientHandler}
-        decrement={this.subtractIngredientHandler}
-        disabled={disabledInfo}
+          increment={this.addIngredientHandler}
+          decrement={this.subtractIngredientHandler}
+          disabled={disabledInfo}
+          price={totalPrice}
+          purchasable={purchasable}
         />
       </>
     )
