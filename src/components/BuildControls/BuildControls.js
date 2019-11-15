@@ -11,13 +11,14 @@ const controls = [
   { label: 'Meat', type: 'meat'},
 ];
 
-const BuildControls = ({ increment, decrement, disabled, price, purchasable, submitOrder }) => (
+const BuildControls = ({ increment, decrement, disabled, price, purchasable, submitOrder, ingredientPrices }) => (
   <div className={classes.BuildControls}>
     <p>Total Price: <strong>${price.toFixed(2)}</strong></p>
     {controls.map(ingredient => {
       return <BuildControl
       key={ingredient.label}
       label={ingredient.label}
+      ingredientPrice={ingredientPrices[ingredient.type].toFixed(2)}
       increment={() => increment(ingredient.type)}
       decrement={() => decrement(ingredient.type)}
       disabled={disabled[ingredient.type]}

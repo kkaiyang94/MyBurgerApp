@@ -95,6 +95,7 @@ class BurgerBuilder extends Component {
           price={totalPrice}
           purchasable={purchasable}
           submitOrder={this.purchaseStateHandler}
+          ingredientPrices={INGREDIENT_PRICES}
         />
       </>
     )
