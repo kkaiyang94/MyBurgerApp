@@ -26,12 +26,15 @@ class BurgerBuilder extends Component {
   }
 
   purchaseStateHandler = () => {
-    this.setState({ purchaseState: true});
+    this.setState({ purchaseState: true });
   }
 
   cancelPurchaseHandler = () => {
-    this.setState({ purchaseState: false});
+    this.setState({ purchaseState: false });
+  }
 
+  confirmPurchaseHandler = () => {
+    alert('continuing with order')
   }
 
   setPurchasableState = () => {
@@ -90,10 +93,15 @@ class BurgerBuilder extends Component {
     return (
       <>
         <Modal
-        show={purchaseState}
-        modalClosed={this.cancelPurchaseHandler}
+          show={purchaseState}
+          modalClosed={this.cancelPurchaseHandler}
         >
-          <OrderSummary ingredients={ingredients}/>
+          <OrderSummary
+            ingredients={ingredients}
+            cancel={this.cancelPurchaseHandler}
+            confirm={this.confirmPurchaseHandler}
+            totalPrice={totalPrice}
+          />
         </Modal>
         <Burger ingredients={ingredients} />
         <BuildControls
