@@ -1,14 +1,22 @@
-import React, { Fragment } from 'react';
+import React, { Component } from 'react';
 
 import Toolbar from '../Navigation/Toolbar/Toolbar';
+import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 
 import classes from './Layout.module.css';
 
-const Layout = props => (
-  <Fragment>
-    <Toolbar />
-    <main className={classes.Content}>{props.children}</main>
-  </Fragment>
-)
+class Layout extends Component {
+  render() {
+    const { children } = this.props;
+
+    return (
+      <>
+        <Toolbar />
+        <SideDrawer />
+        <main className={classes.Content}>{children}</main>
+      </>
+    )
+  }
+}
 
 export default Layout;
