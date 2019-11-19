@@ -8,8 +8,10 @@ import classes from './Toolbar.module.css';
 const Toolbar = props => (
   <header className={classes.Toolbar}>
     <div>HEADER</div>
-    <Logo />
-    <nav>
+    <div className={classes.Logo}>
+      <Logo />
+    </div>
+    <nav className={classes.DesktopOnly}>
       <NavigationItems />
     </nav>
   </header>
