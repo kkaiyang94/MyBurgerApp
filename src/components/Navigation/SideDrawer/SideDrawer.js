@@ -6,12 +6,16 @@ import Backdrop from '../../UI/Backdrop/Backdrop';
 
 import classes from './SideDrawer.module.css';
 
-const SideDrawer = props => {
+const SideDrawer = ({ open, close }) => {
+  let attachedClasses = [classes.SideDrawer, classes.Close];
+  if (open) {
+    attachedClasses  = [classes.SideDrawer, classes.Open];
+  }
 
   return (
     <>
-      <Backdrop show/>
-      <div className={classes.SideDrawer}>
+      <Backdrop show={open} clicked={close}/>
+      <div className={attachedClasses.join(' ')}>
         <div className={classes.Logo}>
           <Logo />
         </div>
