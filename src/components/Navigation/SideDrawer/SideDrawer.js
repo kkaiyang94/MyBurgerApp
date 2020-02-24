@@ -9,12 +9,12 @@ import classes from './SideDrawer.module.css';
 const SideDrawer = ({ open, close }) => {
   let attachedClasses = [classes.SideDrawer, classes.Close];
   if (open) {
-    attachedClasses  = [classes.SideDrawer, classes.Open];
+    attachedClasses = [classes.SideDrawer, classes.Open];
   }
 
   return (
     <>
-      <Backdrop show={open} clicked={close}/>
+      <Backdrop show={open} clicked={close} />
       <div className={attachedClasses.join(' ')}>
         <div className={classes.Logo}>
           <Logo />

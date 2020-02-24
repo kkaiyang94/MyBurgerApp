@@ -31,11 +31,11 @@ class Checkout extends Component {
     const { ingredients, totalPrice } = this.state;
     return (
       <div>
-        <CheckOutSummary 
-          ingredients={this.state.ingredients} 
-          checkOutCancel={this.checkOutCancelHandler} 
-          checkOutContinue={this.checkOutContinueHandler}/>
-        <Route path={this.props.match.path + '/contact-data'} render={(props) => (<ContactData totalPrice={totalPrice} ingredients={ingredients} {...props}/>)}/>
+        <CheckOutSummary
+          ingredients={this.state.ingredients}
+          checkOutCancel={this.checkOutCancelHandler}
+          checkOutContinue={this.checkOutContinueHandler} />
+        <Route path={this.props.match.path + '/contact-data'} render={(props) => (<ContactData totalPrice={totalPrice} ingredients={ingredients} {...props} />)} />
       </div>
     )
   }

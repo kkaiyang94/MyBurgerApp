@@ -32,7 +32,7 @@ class BurgerBuilder extends Component {
         })
       })
       .catch(error => {
-        this.setState({error: true});
+        this.setState({ error: true });
       })
   }
   purchaseStateHandler = () => {
@@ -44,9 +44,8 @@ class BurgerBuilder extends Component {
   }
 
   confirmPurchaseHandler = () => {
-    // alert('continuing with order')
     const { ingredients, totalPrice } = this.state;
-    
+
     const ingredientsOrdered = [];
     for (let ingredient in ingredients) {
       ingredientsOrdered.push(encodeURIComponent(ingredient) + '=' + encodeURIComponent(ingredients[ingredient]));
